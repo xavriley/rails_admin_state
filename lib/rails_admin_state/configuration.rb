@@ -7,22 +7,20 @@ module RailsAdminState
     def options
       @options ||= {
           states: {
-            published: 'label-success',
-            sent: 'label-success',
-            done: 'label-success',
-            cancelled: 'label-important',
-            deleted: 'label-important',
-            trashed: 'label-important',
-            draft: 'label-important',
+            in_development: 'warning',
+            pending_review: 'warning',
+            scheduled: 'success',
+            running: 'success',
+            rejected: 'important',
+            withdrawn: 'important',
           },
-          events: {
-            publish: 'btn-success',
-            confirm: 'btn-success',
-            send: 'btn-success',
-            done: 'btn-success',
-            cancel: 'btn-danger',
-            delete: 'btn-danger',
-            trash: 'btn-danger',
+          labels: {
+            in_development: 'mark as in_development',
+            pending_review: 'mark as pending review',
+            scheduled: 'schedule',
+            running: 'run',
+            rejected: 'reject',
+            withdrawn: 'withdraw',
           },
           disable: []
       }.merge(config)
@@ -34,9 +32,9 @@ module RailsAdminState
       options[:states][name.to_sym] || ''
     end
 
-    def event(name)
+    def label(name)
       return '' if name.nil?
-      options[:events][name.to_sym] || ''
+      options[:labels][name.to_sym] || ''
     end
 
     def disabled?(name)
